@@ -1,6 +1,6 @@
 # gptstorehackathon
 
-## Ale, Dang, Rusul, Sams
+## Ale, Dang, Rusul, Shams
 
 ## Team Members
 - Ale
