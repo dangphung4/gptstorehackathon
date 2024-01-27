@@ -15,5 +15,22 @@ export const themeColors = {
       DarkButton: '#1B1C20',
       PrimaryBaseAccent: '#24282D',
     },
+
+    light: {
+        BackgroundColor: '#DEDFE3',
+        PrimaryColor: '#CCD1D7',
+        PrimaryColorLight: '#E4E6EB',
+        SecondaryColor: '#DBD9D9',
+        AccentColor: '#0FC26F',
+        WarningColor: '#F47C7C',
+        BottomTabIconColor: '#000000',
+        mainTextColor: '#000000',
+        subTitleColor: '#A3A3A3',
+        TextColor1: '#4DFFB8',
+        TextColor2: '#FFC75F',
+        TextColor3: '#F88379',
+        DarkButton: '#B1B2B5',
+        PrimaryBaseAccent: '#6C646C',
+      },
   };
   
