@@ -19,11 +19,17 @@ export default function App() {
     // Implement the logic for searching and recommending music based on the songQuery
     // You can make an API call or perform some AI-related operations here
     console.log(`Searching for music based on: ${songQuery}`);
+
+    // then clear input field
+    setSongQuery("");
   };
 
   const handleGptSearch = () => {
     // Implement the logic for handling the GPT search when the input is submitted
     console.log(`Handling GPT search for: ${gptQuery}`);
+
+    // then clear input field
+    setGptQuery("");
   };
 
   const toggleDarkMode = () => {
