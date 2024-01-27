@@ -64,13 +64,13 @@ def song_recommendations():
 
     # Fetch recommendations from Spotify
     # Replace this URL with your actual Spotify API endpoint
-    spotify_response = requests.post('http://your_spotify_endpoint', json={'song_or_artist': song_or_artist})
+    spotify_response = requests.post('http://localhost:5000/', json={'song_or_artist': song_or_artist})
     recommendations = spotify_response.json()['recommendations']
 
     # Generate a ChatGPT response describing these songs
     description_prompt = f"Describe these songs: {recommendations}"
-    chat_response = openai.Completion.create(
-        engine='gpt-3.5-turbo',
+    chat_response = client.chat.completions.create(
+        model=MODEL,
         prompt=description_prompt,
         max_tokens=150
     )
@@ -78,7 +78,7 @@ def song_recommendations():
 
     return jsonify({'description': description})
 
-def extract_song_and_artist(speech_text):
+def extract_song_or_artist(speech_text):
     # Regular expression patterns to match song names and artists
     song_pattern = r'(?i)(?:song|track):?\s*(\w+(?:\s+\w+)*)'
     artist_pattern = r'(?i)(?:artist|singer|band):?\s*(\w+(?:\s+\w+)*)'
