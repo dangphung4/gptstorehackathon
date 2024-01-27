@@ -14,27 +14,43 @@ export default function App() {
   const [songQuery, setSongQuery] = useState("");
   const [isDarkMode, setIsDarkMode] = useState(true);
   const [gptQuery, setGptQuery] = useState("");
+  const [response, setResponse] = useState("");
 
   const handleSearch = () => {
-    // Implement the logic for searching and recommending music based on the songQuery
-    // You can make an API call or perform some AI-related operations here
     console.log(`Searching for music based on: ${songQuery}`);
 
-    // then clear input field
     setSongQuery("");
   };
 
-  const handleGptSearch = () => {
-    // Implement the logic for handling the GPT search when the input is submitted
+  const handleGptSearch = async () => {
     console.log(`Handling GPT search for: ${gptQuery}`);
-
-    // then clear input field
+    try {
+      const response = await fetch("http://localhost:8000/chat", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          user_id: "userID",
+          message: gptQuery,
+        }),
+      });
+      const data = await response.json();
+      console.log("API response:", data);
+      setResponse(response.reply);
+    } catch (error) {
+      console.error("Error:", error);
+    }
     setGptQuery("");
   };
+ 
+
 
   const toggleDarkMode = () => {
     setIsDarkMode((prevMode) => !prevMode);
   };
+
+  
 
   return (
     <View
@@ -50,7 +66,7 @@ export default function App() {
       <TouchableOpacity style={styles.toggleButton} onPress={toggleDarkMode}>
         <Text>{isDarkMode ? "🌙" : "☀️"}</Text>
       </TouchableOpacity>
-      <Text>I like men!</Text>
+      <Text style={styles.text}>{response}</Text>
       {/* <TextInput
         style={styles.input}
         placeholder="enter song name"
@@ -72,7 +88,10 @@ export default function App() {
         onChangeText={(text) => setGptQuery(text)}
         placeholder="Message ChatGpt..."
         value={gptQuery}
-        onSubmitEditing={handleGptSearch}
+        onSubmitEditing={(event) => {
+          event.preventDefault(); // Prevent default behavior
+          handleGptSearch(); // Call your custom function
+        }}
       />
       <StatusBar style="auto" />
     </View>
@@ -93,5 +112,8 @@ const styles = StyleSheet.create({
   },
   input: {
     color: themeColors.dark.TextColor1,
+  },
+  text: {
+    color: themeColors.dark.AccentColor,
   },
 });
