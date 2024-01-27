@@ -3,47 +3,12 @@ import {
   StyleSheet,
   Text,
   View,
-  TextInput,
   TouchableOpacity,
+  TextInput,
 } from "react-native";
 import React, { useState } from "react";
 import { themeColors } from "./ThemeProvider";
-
-const StyledTextInput = ({
-  style,
-  placeholder,
-  value,
-  onChangeText,
-  ...restProps
-}) => (
-  <View style={{ position: "relative", width: "100%" }}>
-    <TextInput
-      style={[
-        style,
-        {
-          textAlign: "center",
-          color: themeColors.dark.TextColor1,
-        },
-      ]}
-      placeholder={placeholder}
-      value={value}
-      onChangeText={onChangeText}
-      {...restProps}
-    />
-    <Text
-      style={{
-        position: "absolute",
-        color: themeColors.dark.subTitleColor,
-
-        textAlign: "center",
-        width: "100%",
-        opacity: value ? 0 : 1, // Hide placeholder when there is input
-      }}
-    >
-      {placeholder}
-    </Text>
-  </View>
-);
+//import TextInput from "react-native-text-input-interactive";
 
 export default function App() {
   const [songQuery, setSongQuery] = useState("");
@@ -87,10 +52,19 @@ export default function App() {
         value={songQuery}
         onSubmitEditing={handleSearch}
       /> */}
-      <StyledTextInput
-        //style={styles.input}
-        placeholder="Message ChatGPT..."
+      <TextInput
+        placeholderTextColor={
+          isDarkMode
+            ? themeColors.dark.subTitleColor
+            : themeColors.light.subTitleColor
+        }
+        color={
+          isDarkMode
+            ? themeColors.dark.TextColor1
+            : themeColors.light.TextColor3
+        }
         onChangeText={(text) => setGptQuery(text)}
+        placeholder="Message ChatGpt..."
         value={gptQuery}
         onSubmitEditing={handleGptSearch}
       />
