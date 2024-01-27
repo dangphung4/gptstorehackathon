@@ -5,4 +5,4 @@ httpx==0.26.0
 pydantic==2.5.3
 pydantic_core==2.14.6
 requests==2.31.0
-Werkzeug==3.0.1
+urllib3==2.1.0

@@ -2,15 +2,16 @@ from flask import Flask, request, redirect
 import requests
 import base64
 import urllib
-
+import os
+from dotenv import load_dotenv
 # Initialize Flask app
 app = Flask(__name__)
 
 # Spotify API Credentials
-CLIENT_ID = 'a84453c58306431f9b82fc2dde760e69'
-CLIENT_SECRET = '4cf441b1c10e4d3f91598947268376a8'
-REDIRECT_URI = 'http://localhost:5000/callback'
-SCOPE = 'user-top-read'
+CLIENT_ID = os.environ.get('CLIENT_ID')
+CLIENT_SECRET = os.environ.get('CLIENT_SECRET')
+REDIRECT_URI = os.environ.get('REDIRECT_URI')
+SCOPE = os.environ.get('SCOPE')
 
 # Function to generate Spotify authorization URL
 def get_auth_url():
